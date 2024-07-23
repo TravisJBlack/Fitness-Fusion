@@ -1,4 +1,3 @@
-import React from "react";
 import { Box, VStack, Link, Text } from "@chakra-ui/react";
 
 const Sidebar = () => {
@@ -14,6 +13,22 @@ const Sidebar = () => {
       <Text fontSize="2xl" mb={4}>
         Dashboard
       </Text>
+      <VStack align="start">
+        <Link px={2} py={1} rounded="md" _hover={{ bg: "teal.700" }} href="#">
+          Home
+        </Link>
+        <Link px={2} py={1} rounded="md" _hover={{ bg: "teal.700" }} href="#">
+          Profile
+        </Link>
+        <Link px={2} py={1} rounded="md" _hover={{ bg: "teal.700" }} href="#">
+          Settings
+        </Link>
+        <Link px={2} py={1} rounded="md" _hover={{ bg: "teal.700" }} href="#">
+          Logout
+        </Link>
+      </VStack>
     </Box>
   );
 };
+
+export default Sidebar;
