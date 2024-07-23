@@ -1,5 +1,5 @@
 const db = require("../config/connection");
-const { User } = require("../models");
+const { User, Class } = require("../models");
 const userSeeds = require("./userSeeds.json");
 const classSeeds = require("./classSeeds.json");
 const cleanDB = require("./cleanDB.js");
@@ -9,8 +9,10 @@ db.once("open", async () => {
     await cleanDB("User", "users");
     await cleanDB("Class", "classes");
 
+    // Seed Users
     await User.create(userSeeds);
 
+    // Seed Classes
     for (let i = 0; i < classSeeds.length; i++) {
       const { _id, name } = await Class.create(classSeeds[i]);
       const user = await User.findOneAndUpdate(
