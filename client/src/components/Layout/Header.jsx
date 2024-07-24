@@ -1,19 +1,27 @@
+import React from "react";
 import {
   Box,
   Flex,
   HStack,
-  Link,
+  Link as ChakraLink,
   IconButton,
   useDisclosure,
 } from "@chakra-ui/react";
+import { Link as RouterLink } from "react-router-dom";
 import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
 
 const Header = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
-    <Box bg="teal.500" px={4}>
-      <Flex h={16} alignItems="center" justifyContent="space-between">
+    <Box bg="teal.500" px={4} w="100%">
+      <Flex
+        h={16}
+        alignItems="center"
+        justifyContent="space-between"
+        maxW="1200px"
+        mx="auto"
+      >
         <IconButton
           size="md"
           icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
@@ -23,36 +31,39 @@ const Header = () => {
         />
         <HStack spacing={8} alignItems="center">
           <Box color="white" fontWeight="bold">
-            Fitness Funsion
+            FitnessFusion
           </Box>
           <HStack as="nav" spacing={4} display={{ base: "none", md: "flex" }}>
-            <Link
+            <ChakraLink
+              as={RouterLink}
+              to="/"
               px={2}
               py={1}
               rounded="md"
               _hover={{ bg: "teal.700" }}
-              href="#"
             >
               Home
-            </Link>
-            <Link
+            </ChakraLink>
+            <ChakraLink
+              as={RouterLink}
+              to="/login"
               px={2}
               py={1}
               rounded="md"
               _hover={{ bg: "teal.700" }}
-              href="#"
             >
-              About
-            </Link>
-            <Link
+              Login
+            </ChakraLink>
+            <ChakraLink
+              as={RouterLink}
+              to="/signup"
               px={2}
               py={1}
               rounded="md"
               _hover={{ bg: "teal.700" }}
-              href="#"
             >
-              Contact Us
-            </Link>
+              Signup
+            </ChakraLink>
           </HStack>
         </HStack>
       </Flex>

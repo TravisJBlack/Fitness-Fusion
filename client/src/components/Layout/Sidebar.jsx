@@ -1,4 +1,6 @@
-import { Box, VStack, Link, Text } from "@chakra-ui/react";
+import React from "react";
+import { Box, VStack, Text, Link as ChakraLink } from "@chakra-ui/react";
+import { Link as RouterLink } from "react-router-dom";
 
 const Sidebar = () => {
   return (
@@ -14,18 +16,46 @@ const Sidebar = () => {
         Dashboard
       </Text>
       <VStack align="start">
-        <Link px={2} py={1} rounded="md" _hover={{ bg: "teal.700" }} href="#">
+        <ChakraLink
+          as={RouterLink}
+          to="/"
+          px={2}
+          py={1}
+          rounded="md"
+          _hover={{ bg: "teal.700" }}
+        >
           Home
-        </Link>
-        <Link px={2} py={1} rounded="md" _hover={{ bg: "teal.700" }} href="#">
+        </ChakraLink>
+        <ChakraLink
+          as={RouterLink}
+          to="/profile"
+          px={2}
+          py={1}
+          rounded="md"
+          _hover={{ bg: "teal.700" }}
+        >
           Profile
-        </Link>
-        <Link px={2} py={1} rounded="md" _hover={{ bg: "teal.700" }} href="#">
+        </ChakraLink>
+        <ChakraLink
+          as={RouterLink}
+          to="/settings"
+          px={2}
+          py={1}
+          rounded="md"
+          _hover={{ bg: "teal.700" }}
+        >
           Settings
-        </Link>
-        <Link px={2} py={1} rounded="md" _hover={{ bg: "teal.700" }} href="#">
+        </ChakraLink>
+        <ChakraLink
+          as={RouterLink}
+          to="/logout"
+          px={2}
+          py={1}
+          rounded="md"
+          _hover={{ bg: "teal.700" }}
+        >
           Logout
-        </Link>
+        </ChakraLink>
       </VStack>
     </Box>
   );
