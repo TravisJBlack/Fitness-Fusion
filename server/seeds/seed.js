@@ -1,7 +1,8 @@
 const db = require("../config/connection");
-const { User, Class } = require("../models");
+const { User, Class, Membership } = require("../models");
 const userSeeds = require("./userSeeds.json");
 const classSeeds = require("./classSeeds.json");
+const membershipSeed = require('./membership.json')
 const cleanDB = require("./cleanDB.js");
 
 db.once("open", async () => {
@@ -24,6 +25,9 @@ db.once("open", async () => {
         }
       );
     }
+    // Seed Membership
+    await Membership.create(membershipSeed);
+
   } catch (err) {
     console.error(err);
     process.exit(1);
