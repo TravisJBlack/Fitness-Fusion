@@ -17,5 +17,7 @@ module.exports = {
       'warn',
       { allowConstantExport: true },
     ],
+    'react/react-in-jsx-scope': 'off', // Disable the rule requiring React in scope for JSX
+    'no-unused-vars': ['error', { varsIgnorePattern: 'React' }] // Ignore unused React import
   },
-}
+};
