@@ -7,8 +7,12 @@ const resolvers = {
             return User.findOne({username}).populate('classes');
         },
 
-        class: async () => {
-            return Class.find();
+        class: async (parent, args) => {
+            return Class.find({});
+        },
+
+        getSingleClass: async (parent, {name}) => {
+            return Class.findOne({name})
         }
     },
 
@@ -36,14 +40,38 @@ const resolvers = {
             return { token, user}
         },
 
-        addClass: async (parent, { name, description, price, schedule}, context) => {
+        addClassToUser: async (parent, {_id}, context) => {
             if(context.user){
+                const register = await Class.findOne({_id});
+                console.log(register)
+
                 return User.findOneAndUpdate(
                     {_id: context.user._id},
-                    { $addToSet: {clasess: {name, description, price, schedule}}}
-                )
+                    { $addToSet: {classes:  {_id: register._id, name: register.name, description: register.description, price: register.price, schedule: register.schedule}}},
+                    {new: true, runValidators: true}
+                ).populate('classes')
             }
             throw AuthenticationError;
+        },
+
+        removeClassFromUser: async (parent, {_id}, context) => {
+            if(context.user){
+
+                return User.findOneAndUpdate(
+                    {_id: context.user._id},
+                    { $pull: {classes:  {_id: _id,}}},
+                    {new: true, runValidators: true}
+                ).populate('classes')
+            }
+            throw AuthenticationError;
+        },
+
+        removeUser: async (parent, args, context) => {
+            if(context.user) {
+                return User.findOneAndDelete(
+                    {_id: context.user._id},
+                )
+            }
         }
     }
 }

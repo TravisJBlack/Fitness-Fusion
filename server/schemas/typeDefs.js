@@ -3,7 +3,6 @@ const typeDefs = `
         _id: ID
         username: String
         email: String
-        password: String
         age: Int
         classes: [Class]
     }
@@ -24,13 +23,16 @@ const typeDefs = `
 
     type Query {
         user(username: String!): User
-        class: Class
+        getSingleClass(name: String!): Class
+        class: [Class]
     }
 
     type Mutation {
         addUser(username: String!, email: String!, password: String!, age: Int!): Auth
         login(email: String!, password: String!): Auth
-        addClass(classId: ID!, name: String, description: String, price: Int, schedule: String): Class
+        addClassToUser(_id: ID!): User
+        removeClassFromUser(_id: ID!): User      
+        removeUser(_id: ID!): User
     }
 `
 
