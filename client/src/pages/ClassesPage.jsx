@@ -9,7 +9,7 @@ const CoursesPage = () => {
     <Router>
       <Box p={4}>
         <Text fontSize="3xl" mb={4}>
-          Courses
+          Classes
         </Text>
         <Switch>
           <Route exact path="/courses" component={CourseList} />
