@@ -1,15 +1,20 @@
-import { Link } from 'react-router-dom';
+import React from "react";
+import { VStack, Heading, Text, Link as ChakraLink } from "@chakra-ui/react";
+import { Link as RouterLink } from "react-router-dom";
 
-function Home() {
-  return (
-    <div>
-      <h1>Welcome to FitnessFusion</h1>
-      <nav>
-        <Link to="/login">Login</Link>
-        <Link to="/signup">Signup</Link>
-      </nav>
-    </div>
-  );
-}
+const Home = () => (
+  <VStack spacing={4} align="center">
+    <Heading as="h2">Home</Heading>
+    <Text>
+      Welcome to FitnessFusion! Click on the links below to login or sign up.
+    </Text>
+    <ChakraLink as={RouterLink} to="/login" color="teal.500">
+      Login
+    </ChakraLink>
+    <ChakraLink as={RouterLink} to="/signup" color="teal.500">
+      Signup
+    </ChakraLink>
+  </VStack>
+);
 
 export default Home;
