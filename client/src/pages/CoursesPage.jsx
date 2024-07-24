@@ -1,7 +1,7 @@
 import React from "react";
 import { Box, Text } from "@chakra-ui/react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import CourseList from "../components/Courses/CourseList";
+import CourseList from "../components/Courses/ClassList";
 import CourseForm from "../components/Courses/CourseForm";
 
 const CoursesPage = () => {

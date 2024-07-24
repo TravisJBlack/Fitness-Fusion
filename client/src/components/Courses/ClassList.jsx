@@ -1,6 +1,6 @@
 import { useQuery, gql } from "@apollo/client";
 import { Box, Text, VStack } from "@chakra-ui/react";
-import CourseItem from "./CourseItem";
+import CourseItem from "./ClassItem";
 
 const GET_COURSES = gql`
   query GetCourses {
