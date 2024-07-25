@@ -41,6 +41,7 @@ app.post("/create-checkout-session", async (req, res) => {
     success_url: `${server}?success=true`,
     cancel_url: `${server}?canceled=true`,
   });
+  res.redirect(303, session.url);
 });
 
 const startApolloServer = async () => {
