@@ -4,6 +4,7 @@ const typeDefs = `
         username: String
         email: String
         age: Int
+        membership: [Membership]
         classes: [Class]
     }
 
@@ -13,6 +14,13 @@ const typeDefs = `
         description: String
         price: Float
         schedule: String
+    }
+
+    type Membership {
+        _id: ID
+        name: String
+        description: String
+        price: Float
     }
 
     type Auth {
@@ -25,6 +33,7 @@ const typeDefs = `
         user(username: String!): User
         getSingleClass(name: String!): Class
         class: [Class]
+        membership: [Membership]
     }
 
     type Mutation {
@@ -33,6 +42,7 @@ const typeDefs = `
         addClassToUser(_id: ID!): User
         removeClassFromUser(_id: ID!): User      
         removeUser(_id: ID!): User
+        addMembershipToUser(_id: ID!): User
     }
 `
 
