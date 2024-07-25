@@ -3,6 +3,9 @@ const { ApolloServer } = require("@apollo/server");
 const { expressMiddleware } = require("@apollo/server/express4");
 const path = require("path");
 const { authMiddleware } = require("./utils/auth");
+const stripe = require("stripe")(
+  "sk_test_51PgZdVElAhzy4uGeVPTVIizjXMqKEKPhyjdK7tC3fo6LuZmEKU9fkkEVZ2ldwegaDbgpYyBjHyqGsr8m9i7qP3T500o17GY0Zk"
+);
 
 const { typeDefs, resolvers } = require("./schemas");
 const db = require("./config/connection");
@@ -12,6 +15,32 @@ const app = express();
 const server = new ApolloServer({
   typeDefs,
   resolvers,
+});
+
+app.post("/create-checkout-session", async (req, res) => {
+  const session = await stripe.checkout.sessions.create({
+    line_items: [
+      {
+        price: "10",
+        quantity: 1,
+      },
+      {
+        price: "25",
+        quantity: 1,
+      },
+      {
+        price: "50",
+        quantity: 1,
+      },
+      {
+        price: "100",
+        quantity: 1,
+      },
+    ],
+    mode: "payment",
+    success_url: `${server}?success=true`,
+    cancel_url: `${server}?canceled=true`,
+  });
 });
 
 const startApolloServer = async () => {
@@ -48,3 +77,6 @@ const startApolloServer = async () => {
 
 // Call the async function to start the server
 startApolloServer();
+
+// Publishable key = pk_test_51PgZdVElAhzy4uGesMESjpkxKEKaw5eGllQtvQupIqKRqSEyhMVD6YMozJUx0OpIOOHwZNRswZs9Z238vXJUaJtk000YQFx7LB
+// Secret Key = sk_test_51PgZdVElAhzy4uGeVPTVIizjXMqKEKPhyjdK7tC3fo6LuZmEKU9fkkEVZ2ldwegaDbgpYyBjHyqGsr8m9i7qP3T500o17GY0Zk
