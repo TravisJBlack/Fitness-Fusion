@@ -5,7 +5,7 @@ import { Link as RouterLink } from "react-router-dom";
 const Home = () => (
   <VStack spacing={4} align="center">
     <Heading as="h2">Home</Heading>
-    <Text>
+    <Text className="text-red-500"> 
       Welcome to FitnessFusion! Click on the links below to login or sign up.
     </Text>
     <ChakraLink as={RouterLink} to="/login" color="teal.500">

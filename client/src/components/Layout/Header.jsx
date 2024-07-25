@@ -8,7 +8,7 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import { Link as RouterLink } from "react-router-dom";
-import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
+// import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
 
 const Header = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -24,7 +24,8 @@ const Header = () => {
       >
         <IconButton
           size="md"
-          icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
+          // icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
+          icon={isOpen ? <></> : <></>}
           aria-label="Open Menu"
           display={{ md: "none" }}
           onClick={isOpen ? onClose : onOpen}
@@ -44,6 +45,7 @@ const Header = () => {
             >
               Home
             </ChakraLink>
+            <span>|</span>
             <ChakraLink
               as={RouterLink}
               to="/login"
@@ -54,6 +56,7 @@ const Header = () => {
             >
               Login
             </ChakraLink>
+            <span>|</span>
             <ChakraLink
               as={RouterLink}
               to="/signup"

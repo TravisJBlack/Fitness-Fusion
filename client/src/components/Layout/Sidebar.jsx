@@ -26,7 +26,9 @@ const Sidebar = () => {
         >
           Home
         </ChakraLink>
+        <hr color='#cccccc' width="100%"/> 
         <ChakraLink
+        className="background-red-500"
           as={RouterLink}
           to="/profile"
           px={2}
@@ -36,6 +38,7 @@ const Sidebar = () => {
         >
           Profile
         </ChakraLink>
+        <hr color='#cccccc' width="100%"/> 
         <ChakraLink
           as={RouterLink}
           to="/settings"
@@ -46,6 +49,7 @@ const Sidebar = () => {
         >
           Settings
         </ChakraLink>
+        <hr color='#cccccc' width="100%"/> 
         <ChakraLink
           as={RouterLink}
           to="/logout"
