@@ -2,6 +2,7 @@ const { Schema, model } = require('mongoose');
 const bcrypt = require('bcrypt');
 
 const Class = require('./Class')
+const Membership = require('./Membership');
 
 const userSchema = new Schema({
     username: {
@@ -25,6 +26,8 @@ const userSchema = new Schema({
         type: Number,
         required: true,
     },
+    membership:  [Membership.schema],
+
     classes: [Class.schema] 
   });
 
