@@ -30,7 +30,7 @@ const typeDefs = `
 
 
     type Query {
-        user(username: String!): User
+        user: User
         getSingleClass(name: String!): Class
         class: [Class]
         membership: [Membership]
