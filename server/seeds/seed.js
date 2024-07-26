@@ -1,15 +1,16 @@
 const db = require("../config/connection");
-const { User, Class, Membership } = require("../models");
+const { Product, User, Class, Membership } = require("../models");
 const userSeeds = require("./userSeeds.json");
 const classSeeds = require("./classSeeds.json");
-const membershipSeed = require('./membership.json')
+const productSeeds = require("./productSeeds.json");
+const membershipSeed = require("./membership.json");
 const cleanDB = require("./cleanDB.js");
 
 db.once("open", async () => {
   try {
     await cleanDB("User", "users");
     await cleanDB("Class", "classes");
-
+    await cleanDB("Product", "products");
     // Seed Users
     await User.create(userSeeds);
 
@@ -27,7 +28,8 @@ db.once("open", async () => {
     }
     // Seed Membership
     await Membership.create(membershipSeed);
-
+    // Seed Product
+    await Product.create(productSeeds);
   } catch (err) {
     console.error(err);
     process.exit(1);

@@ -3,9 +3,9 @@ const { ApolloServer } = require("@apollo/server");
 const { expressMiddleware } = require("@apollo/server/express4");
 const path = require("path");
 const { authMiddleware } = require("./utils/auth");
-const stripe = require("stripe")(
-  "sk_test_51PgZdVElAhzy4uGeVPTVIizjXMqKEKPhyjdK7tC3fo6LuZmEKU9fkkEVZ2ldwegaDbgpYyBjHyqGsr8m9i7qP3T500o17GY0Zk"
-);
+// const stripe = require("stripe")(
+//   "sk_test_51PgZdVElAhzy4uGeVPTVIizjXMqKEKPhyjdK7tC3fo6LuZmEKU9fkkEVZ2ldwegaDbgpYyBjHyqGsr8m9i7qP3T500o17GY0Zk"
+// );
 
 const { typeDefs, resolvers } = require("./schemas");
 const db = require("./config/connection");
@@ -17,32 +17,32 @@ const server = new ApolloServer({
   resolvers,
 });
 
-app.post("/create-checkout-session", async (req, res) => {
-  const session = await stripe.checkout.sessions.create({
-    line_items: [
-      {
-        price: "10",
-        quantity: 1,
-      },
-      {
-        price: "25",
-        quantity: 1,
-      },
-      {
-        price: "50",
-        quantity: 1,
-      },
-      {
-        price: "100",
-        quantity: 1,
-      },
-    ],
-    mode: "payment",
-    success_url: `${server}?success=true`,
-    cancel_url: `${server}?canceled=true`,
-  });
-  res.redirect(303, session.url);
-});
+// app.post("/create-checkout-session", async (req, res) => {
+//   const session = await stripe.checkout.sessions.create({
+//     line_items: [
+//       {
+//         price: "10",
+//         quantity: 1,
+//       },
+//       {
+//         price: "25",
+//         quantity: 1,
+//       },
+//       {
+//         price: "50",
+//         quantity: 1,
+//       },
+//       {
+//         price: "100",
+//         quantity: 1,
+//       },
+//     ],
+//     mode: "payment",
+//     success_url: `${server}?success=true`,
+//     cancel_url: `${server}?canceled=true`,
+//   });
+//   res.redirect(303, session.url);
+// });
 
 const startApolloServer = async () => {
   await server.start();

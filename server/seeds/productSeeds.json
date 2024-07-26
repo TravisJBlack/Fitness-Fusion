@@ -1,0 +1,28 @@
+[
+  {
+    "name": "Membership",
+    "price": "20",
+    "category": "Membership"
+  },
+  {
+    "name": "$10 Donation",
+    "price": "10",
+    "category": "Donation"
+  },
+  {
+    "name": "$25 Donation",
+    "price": "25",
+    "category": "Donation"
+  },
+  {
+    "name": "$50 Donation",
+    "price": "50",
+    "category": "Donation"
+  },
+  {
+    "name": "$100 Donation",
+    "price": "50",
+    "category": "Donation"
+  },
+  {}
+]

@@ -28,6 +28,9 @@ const typeDefs = `
         user: User
     }
 
+    type CheckoutSession {
+        url: String
+    }
 
     type Query {
         user(username: String!): User
@@ -43,7 +46,8 @@ const typeDefs = `
         removeClassFromUser(_id: ID!): User      
         removeUser(_id: ID!): User
         addMembershipToUser(_id: ID!): User
+        createCheckoutSession: CheckoutSession
     }
-`
+`;
 
 module.exports = typeDefs;
