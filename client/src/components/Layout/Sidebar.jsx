@@ -5,16 +5,17 @@ import { Link as RouterLink } from "react-router-dom";
 const Sidebar = () => {
   return (
     <Box
-      bg="teal.500"
+      bgGradient="linear(to-t, purple.200, purple.500)"
+      // bg="purple.400"
       color="white"
       w={{ base: "full", md: 60 }}
       pos="fixed"
       h="full"
       p={4}
     >
-      <Text fontSize="2xl" mb={4}>
+      {/* <Text fontSize="2xl" mb={4}>
         Dashboard
-      </Text>
+      </Text> */}
       <VStack align="start">
         <ChakraLink
           as={RouterLink}
