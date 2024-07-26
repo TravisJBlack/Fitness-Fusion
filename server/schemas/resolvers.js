@@ -3,8 +3,11 @@ const { signToken, AuthenticationError } = require('../utils/auth')
 
 const resolvers = {
     Query: {
-        user: async (parent, { username }) => {
-            return User.findOne({ username }).populate('classes');
+        user: async (parent, args, context) => {
+            if (context.user) {
+                return User.findOne({ _id: context.user._id }).populate('classes');
+            }
+            throw AuthenticationError;
         },
 
         class: async (parent, args) => {
@@ -80,7 +83,7 @@ const resolvers = {
         addMembershipToUser: async (parent, { _id }, context) => {
             if (context.user) {
                 const membership = await Membership.findOne({ _id });
-                
+
                 return User.findOneAndUpdate(
                     { _id: context.user._id },
                     { $addToSet: { membership: { _id: membership._id, name: membership.name, description: membership.description, price: membership.price } } },
