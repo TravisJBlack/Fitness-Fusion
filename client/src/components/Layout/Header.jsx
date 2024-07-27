@@ -5,16 +5,19 @@ import {
   HStack,
   Link as ChakraLink,
   IconButton,
+  Image,
   useDisclosure,
 } from "@chakra-ui/react";
 import { Link as RouterLink } from "react-router-dom";
-import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
+import source from "../../../public/images/FF logo.pdf";
+
+// import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
 
 const Header = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
-    <Box bg="teal.500" px={4} w="100%">
+    <Box w="100%" h="100px" bgGradient="linear(to-t, purple.200, purple.500)" >
       <Flex
         h={16}
         alignItems="center"
@@ -24,14 +27,21 @@ const Header = () => {
       >
         <IconButton
           size="md"
-          icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
+          // icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
+          icon={isOpen ? <></> : <></>}
           aria-label="Open Menu"
           display={{ md: "none" }}
           onClick={isOpen ? onClose : onOpen}
         />
         <HStack spacing={8} alignItems="center">
-          <Box color="white" fontWeight="bold">
+          <Box color="white" margin="10" fontWeight="extrabold">
+          <Image
+    boxSize='50px'
+    objectFit='cover'
+    src={source}
+  />
             FitnessFusion
+            
           </Box>
           <HStack as="nav" spacing={4} display={{ base: "none", md: "flex" }}>
             <ChakraLink
@@ -44,6 +54,7 @@ const Header = () => {
             >
               Home
             </ChakraLink>
+            <span>|</span>
             <ChakraLink
               as={RouterLink}
               to="/login"
@@ -54,6 +65,7 @@ const Header = () => {
             >
               Login
             </ChakraLink>
+            <span>|</span>
             <ChakraLink
               as={RouterLink}
               to="/signup"
