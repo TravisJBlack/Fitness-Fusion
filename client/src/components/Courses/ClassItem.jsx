@@ -1,20 +1,18 @@
-import React from "react";
-import { Box, Text } from "@chakra-ui/react";
-import { Link } from "react-router-dom";
+import { Box, Text, Heading } from "@chakra-ui/react";
 import Button from "../Shared/Button";
 
-const CourseItem = ({ course }) => {
+const ClassItem = ({ classItem, onEnroll }) => {
   return (
-    <Box p={4} shadow="md" borderWidth="1px">
-      <Text fontSize="xl">{course.name}</Text>
-      <Text mt={4}>{course.description}</Text>
-      <Link to={`/courses/enroll/${course.id}`}>
-        <Button mt={4} colorScheme="teal">
-          Enroll
-        </Button>
-      </Link>
+    <Box p={5} shadow="md" borderWidth="1px">
+      <Heading fontSize="xl">{classItem.name}</Heading>
+      <Text mt={4}>{classItem.description}</Text>
+      <Text mt={4}>Price: ${classItem.price}</Text>
+      <Text mt={4}>Schedule: {classItem.schedule}</Text>
+      <Button mt={4} colorScheme="teal" onClick={onEnroll}>
+        Enroll
+      </Button>
     </Box>
   );
 };
 
-export default CourseItem;
+export default ClassItem;
