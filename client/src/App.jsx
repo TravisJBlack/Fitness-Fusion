@@ -7,6 +7,7 @@ import "./App.css";
 import Login from "./components/Auth/Login";
 import Signup from "./components/Auth/Signup";
 import Layout from "./components/Layout/Layout";
+import Home from "./pages/Home"
 
 
 // Construct our main GraphQL API endpoint
@@ -52,14 +53,5 @@ function App() {
 
   );
 }
-
-const Home = () => (
-  <VStack spacing={4} align="center">
-    <Heading as="h2">Home</Heading>
-    <Text>
-      Welcome to FitnessFusion! Click on the links above to login or sign up.
-    </Text>
-  </VStack>
-);
 
 export default App;
