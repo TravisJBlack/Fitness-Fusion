@@ -4,6 +4,7 @@ const typeDefs = `
         username: String
         email: String
         age: Int
+        membership: [Membership]
         classes: [Class]
     }
 
@@ -15,6 +16,13 @@ const typeDefs = `
         schedule: String
     }
 
+    type Membership {
+        _id: ID
+        name: String
+        description: String
+        price: Float
+    }
+
     type Auth {
         token: ID!
         user: User
@@ -22,9 +30,10 @@ const typeDefs = `
 
 
     type Query {
-        user(username: String!): User
+        user: User
         getSingleClass(name: String!): Class
         class: [Class]
+        membership: [Membership]
     }
 
     type Mutation {
@@ -33,6 +42,7 @@ const typeDefs = `
         addClassToUser(_id: ID!): User
         removeClassFromUser(_id: ID!): User      
         removeUser(_id: ID!): User
+        addMembershipToUser(_id: ID!): User
     }
 `
 
