@@ -10,14 +10,13 @@ import {
 } from "@chakra-ui/react";
 import { Link as RouterLink } from "react-router-dom";
 import source from "../../../public/images/FF logo.pdf";
-
 // import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
 
 const Header = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
-    <Box w="100%" h="100px" bgGradient="linear(to-t, purple.200, purple.500)" >
+    <Box w="100%" h="100px" bgGradient="linear(to-t, purple.200, purple.500)">
       <Flex
         h={16}
         alignItems="center"
@@ -35,13 +34,8 @@ const Header = () => {
         />
         <HStack spacing={8} alignItems="center">
           <Box color="white" margin="10" fontWeight="extrabold">
-          <Image
-    boxSize='50px'
-    objectFit='cover'
-    src={source}
-  />
+            <Image boxSize="50px" objectFit="cover" src={source} />
             FitnessFusion
-            
           </Box>
           <HStack as="nav" spacing={4} display={{ base: "none", md: "flex" }}>
             <ChakraLink
@@ -53,6 +47,17 @@ const Header = () => {
               _hover={{ bg: "teal.700" }}
             >
               Home
+            </ChakraLink>
+            <span>|</span>
+            <ChakraLink
+              as={RouterLink}
+              to="/classes"
+              px={2}
+              py={1}
+              rounded="md"
+              _hover={{ bg: "teal.700" }}
+            >
+              Classes
             </ChakraLink>
             <span>|</span>
             <ChakraLink

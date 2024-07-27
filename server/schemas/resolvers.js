@@ -1,97 +1,90 @@
-const { User, Class, Membership } = require('../models');
-const { signToken, AuthenticationError } = require('../utils/auth')
+const { User, Class, Membership } = require("../models");
+const { signToken, AuthenticationError } = require("../utils/auth");
 
 const resolvers = {
-    Query: {
-        user: async (parent, args, context) => {
-            if (context.user) {
-                return User.findOne({ _id: context.user._id }).populate('classes');
-            }
-            throw AuthenticationError;
-        },
-
-        class: async (parent, args) => {
-            return Class.find({});
-        },
-
-        membership: async (parent, args) => {
-            return Membership.find({});
-        },
-
-        getSingleClass: async (parent, { name }) => {
-            return Class.findOne({ name })
-        }
+  Query: {
+    user: async (parent, args, context) => {
+      if (context.user) {
+        return User.findOne({ _id: context.user._id }).populate("classes");
+      }
+      throw new AuthenticationError("Not logged in");
     },
+    classes: async () => {
+      // Ensure the query name matches
+      return Class.find({});
+    },
+    memberships: async () => {
+      // Ensure the query name matches
+      return Membership.find({});
+    },
+    getSingleClass: async (parent, { id }) => {
+      return Class.findById(id);
+    },
+  },
 
-    Mutation: {
-        addUser: async (parent, { username, email, password, age }) => {
-            const user = User.create({ username, email, password, age })
-            const token = signToken(user);
-            return { token, user }
-        },
+  Mutation: {
+    addUser: async (parent, { username, email, password, age }) => {
+      const user = await User.create({ username, email, password, age });
+      const token = signToken(user);
+      return { token, user };
+    },
+    login: async (parent, { email, password }) => {
+      const user = await User.findOne({ email });
 
-        login: async (parent, { email, password }) => {
-            const user = await User.findOne({ email });
+      if (!user) {
+        throw new AuthenticationError("Invalid credentials");
+      }
 
-            if (!user) {
-                throw AuthenticationError;
-            }
+      const correctPw = await user.isCorrectPassword(password);
 
-            const correctPw = await user.isCorrectPassword(password);
+      if (!correctPw) {
+        throw new AuthenticationError("Invalid credentials");
+      }
+      const token = signToken(user);
 
-            if (!correctPw) {
-                throw AuthenticationError;
-            }
-            const token = signToken(user);
+      return { token, user };
+    },
+    addClassToUser: async (parent, { id }, context) => {
+      if (context.user) {
+        const register = await Class.findById(id);
 
-            return { token, user }
-        },
+        return User.findByIdAndUpdate(
+          context.user._id,
+          { $addToSet: { classes: register } },
+          { new: true, runValidators: true }
+        ).populate("classes");
+      }
+      throw new AuthenticationError("You need to be logged in!");
+    },
+    removeClassFromUser: async (parent, { id }, context) => {
+      if (context.user) {
+        return User.findByIdAndUpdate(
+          context.user._id,
+          { $pull: { classes: id } },
+          { new: true, runValidators: true }
+        ).populate("classes");
+      }
+      throw new AuthenticationError("You need to be logged in!");
+    },
+    removeUser: async (parent, args, context) => {
+      if (context.user) {
+        return User.findByIdAndDelete(context.user._id);
+      }
+      throw new AuthenticationError("You need to be logged in!");
+    },
+    addMembershipToUser: async (parent, { id }, context) => {
+      if (context.user) {
+        const membership = await Membership.findById(id);
 
-        addClassToUser: async (parent, { _id }, context) => {
-            if (context.user) {
-                const register = await Class.findOne({ _id });
+        return User.findByIdAndUpdate(
+          context.user._id,
+          { $addToSet: { membership } },
+          { new: true, runValidators: true }
+        ).populate("classes");
+      }
+      throw new AuthenticationError("You need to be logged in!");
+    },
+  },
+};
 
-                return User.findOneAndUpdate(
-                    { _id: context.user._id },
-                    { $addToSet: { classes: { _id: register._id, name: register.name, description: register.description, price: register.price, schedule: register.schedule } } },
-                    { new: true, runValidators: true }
-                ).populate('classes')
-            }
-            throw AuthenticationError;
-        },
-
-        removeClassFromUser: async (parent, { _id }, context) => {
-            if (context.user) {
-
-                return User.findOneAndUpdate(
-                    { _id: context.user._id },
-                    { $pull: { classes: { _id: _id, } } },
-                    { new: true, runValidators: true }
-                ).populate('classes')
-            }
-            throw AuthenticationError;
-        },
-
-        removeUser: async (parent, args, context) => {
-            if (context.user) {
-                return User.findOneAndDelete(
-                    { _id: context.user._id },
-                )
-            }
-        },
-
-        addMembershipToUser: async (parent, { _id }, context) => {
-            if (context.user) {
-                const membership = await Membership.findOne({ _id });
-
-                return User.findOneAndUpdate(
-                    { _id: context.user._id },
-                    { $addToSet: { membership: { _id: membership._id, name: membership.name, description: membership.description, price: membership.price } } },
-                    { new: true, runValidators: true }
-                ).populate('classes')
-            }
-            throw AuthenticationError;
-        }
-    }
-}
 module.exports = resolvers;
