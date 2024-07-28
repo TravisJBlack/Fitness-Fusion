@@ -9,7 +9,7 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import { Link as RouterLink } from "react-router-dom";
-import source from "../../../public/images/FF logo.pdf";
+import source from "../../../public/images/unnamed.jpg";
 
 // import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
 
@@ -22,7 +22,6 @@ const Header = () => {
         h={16}
         alignItems="center"
         justifyContent="space-between"
-        maxW="1200px"
         mx="auto"
       >
         <IconButton
