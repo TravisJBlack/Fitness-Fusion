@@ -5,6 +5,7 @@ import { Link as RouterLink } from "react-router-dom";
 const Sidebar = () => {
   return (
     <Box
+
       bgGradient="linear(to-t, purple.200, purple.500)"
       // bg="purple.400"
       color="white"
@@ -64,6 +65,7 @@ const Sidebar = () => {
       </VStack>
     </Box>
   );
+
 };
 
 export default Sidebar;

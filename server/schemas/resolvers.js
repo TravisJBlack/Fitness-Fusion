@@ -50,10 +50,10 @@ const resolvers = {
         addClassToUser: async (parent, { _id }, context) => {
             if (context.user) {
                 const register = await Class.findOne({ _id });
-
+                
                 return User.findOneAndUpdate(
                     { _id: context.user._id },
-                    { $addToSet: { classes: { _id: register._id, name: register.name, description: register.description, price: register.price, schedule: register.schedule } } },
+                    { $addToSet: { classes: { _id: register._id, name: register.name, description: register.description, price: register.price, schedule: register.schedule, image: register.image } } },
                     { new: true, runValidators: true }
                 ).populate('classes')
             }

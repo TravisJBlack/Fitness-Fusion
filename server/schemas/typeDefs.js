@@ -14,6 +14,7 @@ const typeDefs = `
         description: String
         price: Float
         schedule: String
+        image: String
     }
 
     type Membership {
