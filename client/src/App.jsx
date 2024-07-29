@@ -12,6 +12,7 @@ import "./App.css";
 import Login from "./components/Auth/Login";
 import Signup from "./components/Auth/Signup";
 import Layout from "./components/Layout/Layout";
+import Profile from "./components/profile/profile";
 import ClassesPage from "./pages/ClassesPage";
 
 // Construct our main GraphQL API endpoint
@@ -48,6 +49,7 @@ function App() {
             <Route path="/signup" element={<Signup />} />
             <Route path="/" element={<Home />} />
             <Route path="/classes" element={<ClassesPage />} />
+            <Route path="/profile" element={<Profile />} />
           </Routes>
         </Layout>
       </Router>

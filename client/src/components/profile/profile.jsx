@@ -3,7 +3,7 @@ import { useQuery } from "@apollo/client";
 import { Box, Text, Heading, VStack } from "@chakra-ui/react";
 import { QUERY_USER } from "../../utils/queries";
 import { useParams } from "react-router-dom";
-import ClassForm from "../ClassForm/ClassForm";
+import ClassForm from "../Classes/ClassForm";
 
 const Profile = () => {
   const { username } = useParams();
