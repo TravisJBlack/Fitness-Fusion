@@ -18,16 +18,20 @@ import { ADDCLASSTOUSER } from '../utils/mutations'
 
 const Home = () => {
 
-  const { loading, data } = useQuery(QUERY_CLASS);
+  const { loading: classLoading, data: classData } = useQuery(QUERY_CLASS);
+  const { loading: userLoading, data: userData } = useQuery(QUERY_USER);
+
   const [addClassToUser, { error, data2 }] = useMutation(ADDCLASSTOUSER)
 
   
-  const classes = data?.class || [];
-
+  const classes = classData?.class || [];
+  const user = userData?.user || [];
+console.log(user)
 
 
   const handleClick = async (event, _id) => {
     event.preventDefault();
+
     try {
       const { data2 } = await addClassToUser({
         variables: ({ id: _id })
@@ -36,14 +40,14 @@ const Home = () => {
       if (error) {
         throw new Error('something went wrong!')
       }
-      
+      return
     } catch (e) {
       console.error(e);
     }
   }
 
   
-  if (loading) {
+  if (classLoading) {
     return "Loading...."
   }
   return (
@@ -108,13 +112,15 @@ const Home = () => {
                           Add class to membership
                         </Button>
                       </PopoverTrigger>
+                     
                       <PopoverContent>
                         <PopoverArrow />
                         <PopoverCloseButton />
                         <PopoverHeader>Confirmation!</PopoverHeader>
                         <PopoverBody>Class has been added to your account!</PopoverBody>
                       </PopoverContent>
-                    </Popover> :
+                     
+                    </Popover>:
                     <Link to='/login'>
                       <Button  
                       bgGradient={index % 2 ==0 ? "linear(to-t, purple.300, purple.600)" : "linear(to-t, purple.300, purple.100)"}

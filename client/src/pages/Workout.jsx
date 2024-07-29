@@ -13,12 +13,17 @@ import {
     VStack,
 } from '@chakra-ui/react'
 import { searchMucleGroup } from '../utils/api';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
+import { useQuery } from '@apollo/client';
+import { QUERY_USER } from '../utils/queries';
 
 
 const Workout = () => {
     const [muscleGroup, setMuscleGroup] = useState([])
+    const {loading, data} = useQuery(QUERY_USER)
 
+    const user = data?.user || [];
+    console.log(user)
     const handleInput = async (searchInput) => {
         
 
