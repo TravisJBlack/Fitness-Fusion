@@ -21,6 +21,14 @@ const resolvers = {
     getSingleClass: async (parent, { name }) => {
       return Class.findOne({ name });
     },
+    getClassesByName: async (parent, { name }) => {
+      console.log("Ramen");
+      const classes = await Class.find({
+        name: { $regex: name, $options: "i" },
+      });
+      console.log(classes);
+      return classes;
+    },
   },
 
   Mutation: {

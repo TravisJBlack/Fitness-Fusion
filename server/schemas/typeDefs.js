@@ -32,6 +32,7 @@ const typeDefs = `
     type Query {
         user: User
         getSingleClass(name: String!): Class
+        getClassesByName(name: String!): [Class]
         class: [Class]
         membership: [Membership]
     }

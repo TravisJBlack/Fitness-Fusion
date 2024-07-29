@@ -46,5 +46,23 @@
     "description": "Pedal your way to better health with our Cycling class. Experience an intense cardio workout while enjoying the thrill of indoor cycling in a motivating group setting.",
     "price": "20",
     "schedule": "August 2nd to October 10th. Tuesdays and Thursdays 6:00 PM - 7:30 PM"
+  },
+  {
+    "name": "Basketball History",
+    "description": "Improve your basketball skills with our basketball class. Whether you're a beginner or an experienced player, this class will help you enhance your game.",
+    "price": "15",
+    "schedule": "March 15th to June 15th. Weekdays 11:00 AM - 1:00 PM"
+  },
+  {
+    "name": "Basketball Man",
+    "description": "Improve your basketball skills with our basketball class. Whether you're a beginner or an experienced player, this class will help you enhance your game.",
+    "price": "15",
+    "schedule": "March 15th to June 15th. Weekdays 11:00 AM - 1:00 PM"
+  },
+  {
+    "name": "Basketball Woman",
+    "description": "Improve your basketball skills with our basketball class. Whether you're a beginner or an experienced player, this class will help you enhance your game.",
+    "price": "15",
+    "schedule": "March 15th to June 15th. Weekdays 11:00 AM - 1:00 PM"
   }
 ]
