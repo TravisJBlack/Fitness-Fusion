@@ -2,19 +2,20 @@ import React from "react";
 import { Box, Text, Heading, Button } from "@chakra-ui/react";
 import { useMutation } from "@apollo/client";
 import { ADDCLASSTOUSER } from "../../utils/mutations";
+import { QUERY_USER } from "../../utils/queries";
 
 const ClassItem = ({ classItem }) => {
-  const [addClassToUser, { error }] = useMutation(ADDCLASSTOUSER);
+  const [addClassToUser] = useMutation(ADDCLASSTOUSER, {
+    refetchQueries: [{ query: QUERY_USER }],
+  });
 
   const handleEnroll = async () => {
     try {
-      await addClassToUser({
-        variables: { id: classItem._id },
-      });
+      await addClassToUser({ variables: { id: classItem._id } });
       alert("Enrolled successfully!");
-    } catch (err) {
-      console.error(err);
-      alert("Failed to enroll.");
+    } catch (e) {
+      console.error(e);
+      alert("Failed to enroll");
     }
   };
 
@@ -27,11 +28,6 @@ const ClassItem = ({ classItem }) => {
       <Button mt={4} colorScheme="teal" onClick={handleEnroll}>
         Enroll
       </Button>
-      {error && (
-        <Text mt={2} color="red.500">
-          {error.message}
-        </Text>
-      )}
     </Box>
   );
 };

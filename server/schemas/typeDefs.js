@@ -44,6 +44,6 @@ const typeDefs = `
         removeUser(_id: ID!): User
         addMembershipToUser(_id: ID!): User
     }
-`
+`;
 
 module.exports = typeDefs;
