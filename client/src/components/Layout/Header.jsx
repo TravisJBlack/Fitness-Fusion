@@ -9,8 +9,8 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import { Link as RouterLink } from "react-router-dom";
-import source from "../../../public/images/FF logo.pdf";
-// import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
+import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
+import Auth from "../../utils/auth";
 
 const Header = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -26,15 +26,14 @@ const Header = () => {
       >
         <IconButton
           size="md"
-          // icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
-          icon={isOpen ? <></> : <></>}
+          icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
+          // icon={isOpen ? <></> : <></>}
           aria-label="Open Menu"
           display={{ md: "none" }}
           onClick={isOpen ? onClose : onOpen}
         />
         <HStack spacing={8} alignItems="center">
           <Box color="white" margin="10" fontWeight="extrabold">
-            <Image boxSize="50px" objectFit="cover" src={source} />
             FitnessFusion
           </Box>
           <HStack as="nav" spacing={4} display={{ base: "none", md: "flex" }}>
@@ -49,38 +48,56 @@ const Header = () => {
               Home
             </ChakraLink>
             <span>|</span>
-            <ChakraLink
-              as={RouterLink}
-              to="/classes"
-              px={2}
-              py={1}
-              rounded="md"
-              _hover={{ bg: "teal.700" }}
-            >
-              Classes
-            </ChakraLink>
-            <span>|</span>
-            <ChakraLink
-              as={RouterLink}
-              to="/login"
-              px={2}
-              py={1}
-              rounded="md"
-              _hover={{ bg: "teal.700" }}
-            >
-              Login
-            </ChakraLink>
-            <span>|</span>
-            <ChakraLink
-              as={RouterLink}
-              to="/signup"
-              px={2}
-              py={1}
-              rounded="md"
-              _hover={{ bg: "teal.700" }}
-            >
-              Signup
-            </ChakraLink>
+            {Auth.loggedIn() ? (
+              <>
+                <ChakraLink
+                  as={RouterLink}
+                  to="/profile"
+                  px={2}
+                  py={1}
+                  rounded="md"
+                  _hover={{ bg: "teal.700" }}
+                >
+                  Profile
+                </ChakraLink>
+                <span>|</span>
+                <ChakraLink
+                  as={RouterLink}
+                  to="/"
+                  px={2}
+                  py={1}
+                  rounded="md"
+                  _hover={{ bg: "teal.700" }}
+                  onClick={Auth.logout}
+                >
+                  Logout
+                </ChakraLink>
+              </>
+            ) : (
+              <>
+                <ChakraLink
+                  as={RouterLink}
+                  to="/login"
+                  px={2}
+                  py={1}
+                  rounded="md"
+                  _hover={{ bg: "teal.700" }}
+                >
+                  Login
+                </ChakraLink>
+                <span>|</span>
+                <ChakraLink
+                  as={RouterLink}
+                  to="/signup"
+                  px={2}
+                  py={1}
+                  rounded="md"
+                  _hover={{ bg: "teal.700" }}
+                >
+                  Signup
+                </ChakraLink>
+              </>
+            )}
           </HStack>
         </HStack>
       </Flex>

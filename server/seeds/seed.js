@@ -1,7 +1,7 @@
 const db = require("../config/connection");
 const { User, Class, Membership } = require("../models");
 const userSeeds = require("./userSeeds.json");
-const classSeeds = require("./classSeeds.json");
+const classSeeds = require("./classSeeds");
 const membershipSeed = require('./membership.json')
 const cleanDB = require("./cleanDB.js");
 

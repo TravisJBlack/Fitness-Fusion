@@ -69,6 +69,7 @@ const resolvers = {
                 description: register.description,
                 price: register.price,
                 schedule: register.schedule,
+                image: register.image,
               },
             },
           },

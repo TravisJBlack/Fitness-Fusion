@@ -19,6 +19,7 @@ export const QUERY_USER = gql`
         description
         schedule
         price
+        image
       }
     }
   }
@@ -32,6 +33,7 @@ export const QUERY_CLASS = gql`
       description
       schedule
       price
+      image
     }
   }
 `;

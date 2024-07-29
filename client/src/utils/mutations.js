@@ -21,6 +21,7 @@ mutation addUser($username: String!, $email: String!, $password: String!, $age: 
           description
           schedule
           price
+          image
         }
       }
     }
@@ -48,6 +49,7 @@ mutation login($email: String!, $password: String!) {
           description
           schedule
           price
+          image
         }
       }
     }
@@ -73,6 +75,7 @@ mutation addClassToUser($id: ID!) {
         description
         schedule
         price
+        image
       }
     }
   }
@@ -97,6 +100,7 @@ mutation removeClassFromUser($id: ID!) {
         description
         schedule
         price
+        image
       }
     }
   }
@@ -121,6 +125,7 @@ mutation removeUser($id: ID!) {
         description
         schedule
         price
+        image
       }
     }
   }
@@ -145,6 +150,7 @@ mutation addMembershipToUser($id: ID!) {
         description
         schedule
         price
+        image
       }
     }
   }

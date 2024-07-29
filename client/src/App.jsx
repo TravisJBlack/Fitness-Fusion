@@ -1,6 +1,5 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { Heading, Text, VStack } from "@chakra-ui/react";
 import {
   ApolloClient,
   ApolloProvider,
@@ -12,8 +11,8 @@ import "./App.css";
 import Login from "./components/Auth/Login";
 import Signup from "./components/Auth/Signup";
 import Layout from "./components/Layout/Layout";
-import Profile from "./components/profile/profile";
-import ClassesPage from "./pages/ClassesPage";
+import Home from "./pages/Home";
+import Workout from "./pages/Workout";
 
 // Construct our main GraphQL API endpoint
 const httpLink = createHttpLink({
@@ -48,22 +47,12 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/" element={<Home />} />
-            <Route path="/classes" element={<ClassesPage />} />
-            <Route path="/profile" element={<Profile />} />
+            <Route path="/workout" element={<Workout />} />
           </Routes>
         </Layout>
       </Router>
     </ApolloProvider>
   );
 }
-
-const Home = () => (
-  <VStack spacing={4} align="center">
-    <Heading as="h2">Home</Heading>
-    <Text>
-      Welcome to FitnessFusion! Click on the links above to login or sign up.
-    </Text>
-  </VStack>
-);
 
 export default App;

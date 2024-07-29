@@ -14,8 +14,8 @@ const Sidebar = () => {
       p={4}
     >
       {/* <Text fontSize="2xl" mb={4}>
-        Dashboard
-      </Text> */}
+      Dashboard
+    </Text> */}
       <VStack align="start">
         <ChakraLink
           as={RouterLink}
@@ -27,9 +27,9 @@ const Sidebar = () => {
         >
           Home
         </ChakraLink>
-        <hr color='#cccccc' width="100%"/> 
+        <hr color="#cccccc" width="100%" />
         <ChakraLink
-        className="background-red-500"
+          className="background-red-500"
           as={RouterLink}
           to="/profile"
           px={2}
@@ -39,7 +39,7 @@ const Sidebar = () => {
         >
           Profile
         </ChakraLink>
-        <hr color='#cccccc' width="100%"/> 
+        <hr color="#cccccc" width="100%" />
         <ChakraLink
           as={RouterLink}
           to="/settings"
@@ -50,7 +50,7 @@ const Sidebar = () => {
         >
           Settings
         </ChakraLink>
-        <hr color='#cccccc' width="100%"/> 
+        <hr color="#cccccc" width="100%" />
         <ChakraLink
           as={RouterLink}
           to="/logout"

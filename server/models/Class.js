@@ -17,6 +17,9 @@ const classSchema = new Schema({
     type: String,
     required: true,
   },
+  image: {
+    type: String,
+  },
 });
 
 const Class = model("Class", classSchema);
