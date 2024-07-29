@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Button, FormControl, FormLabel, Input } from '@chakra-ui/react';
+import { Box, Button, FormControl, FormLabel, Input, Alert } from '@chakra-ui/react';
 import { useMutation } from '@apollo/client';
 import Auth from '../../utils/auth';
 import { LOGIN_USER } from '../../utils/mutations';
@@ -34,6 +34,14 @@ const handleInputChange = (event) => {
 
 
   return (
+
+    <>
+      {data ? (
+        <p>
+          Success! You may now head{' '}
+          <Link to="/">back to the homepage.</Link>
+        </p>
+      ) : (
     <Box maxW="md" mx="auto" mt="10">
       <form onSubmit={handleFormSubmit}>
         <FormControl id="email">
@@ -56,6 +64,14 @@ const handleInputChange = (event) => {
         <Button colorScheme="teal" mt="4" type="submit">Login</Button>
       </form>
     </Box>
+  )}
+
+{error && (
+  <Alert status='error'>
+    {error.message}
+  </Alert>
+)}
+</>
   );
 };
 

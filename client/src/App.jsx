@@ -1,6 +1,5 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { Heading, Text, VStack } from "@chakra-ui/react";
 import { ApolloClient, ApolloProvider, InMemoryCache, createHttpLink } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 import "./App.css";
@@ -8,6 +7,7 @@ import Login from "./components/Auth/Login";
 import Signup from "./components/Auth/Signup";
 import Layout from "./components/Layout/Layout";
 import Home from "./pages/Home"
+import Workout from './pages/Workout'
 
 
 // Construct our main GraphQL API endpoint
@@ -45,6 +45,7 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/" element={<Home />} />
+            <Route path='/workout' element={<Workout />}/>
 
           </Routes>
         </Layout>
