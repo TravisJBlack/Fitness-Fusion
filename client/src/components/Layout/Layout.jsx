@@ -2,7 +2,7 @@ import React from "react";
 import { Box, Flex } from "@chakra-ui/react";
 import Header from "./Header";
 import Footer from "./Footer";
-import Sidebar from "./Sidebar";
+// import Sidebar from "./Sidebar";
 
 const Layout = ({ children }) => {
   return (
