@@ -8,8 +8,7 @@ const Sidebar = () => {
       bgGradient="linear(to-t, purple.200, purple.500)"
       // bg="purple.400"
       color="white"
-      w={{ base: "full", md: 60 }}
-      pos="fixed"
+      //pos="fixed"
       h="full"
       p={4}
     >
