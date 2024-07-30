@@ -50,13 +50,14 @@ export const QUERY_MEMBERSHIP = gql`
 `;
 
 export const QUERY_SINGLECLASS = gql`
-    query getSingleClass($id: ID!) {
-        getSingleClass(_id: $id) {
-        _id
-        name
-        description
-        schedule
-        price
-        }
-    }
+  query getSingleClass($name: String!) {
+    getSingleClass(name: $name) {
+      _id
+      description
+      image
+      name
+      price
+      schedule
+  }
+}
 `;
