@@ -18,7 +18,7 @@ const Signup = () => {
     username: "",
     email: "",
     password: "",
-    age: "",
+    age: null,
   });
   const [addUser, { error, data }] = useMutation(ADD_USER);
 
@@ -30,10 +30,18 @@ const Signup = () => {
   const handleFormSubmit = async (event) => {
     event.preventDefault();
 
+    let newUser = {
+      username: userData.username,
+      email: userData.email,
+      password: userData.password,
+      age: Number(userData.age),
+    };
+
     try {
       const { data } = await addUser({
-        variables: { ...userData },
+        variables: { ...newUser },
       });
+      //console.log(typeof userData.age);
 
       Auth.login(data.addUser.token);
     } catch (e) {
@@ -43,7 +51,7 @@ const Signup = () => {
       username: "",
       email: "",
       password: "",
-      age: "",
+      age: null,
     });
   };
 
