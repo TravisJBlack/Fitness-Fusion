@@ -1,11 +1,10 @@
 const express = require("express");
+const cors = require("cors");
 const { ApolloServer } = require("@apollo/server");
 const { expressMiddleware } = require("@apollo/server/express4");
 const path = require("path");
 const { authMiddleware } = require("./utils/auth");
-const stripe = require("stripe")(
-  "sk_test_51PgZdVElAhzy4uGeVPTVIizjXMqKEKPhyjdK7tC3fo6LuZmEKU9fkkEVZ2ldwegaDbgpYyBjHyqGsr8m9i7qP3T500o17GY0Zk"
-);
+const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
 const { typeDefs, resolvers } = require("./schemas");
 const db = require("./config/connection");
@@ -17,41 +16,40 @@ const server = new ApolloServer({
   resolvers,
 });
 
+// Enable CORS for all routes
+app.use(cors({ origin: 'http://localhost:3000' }));
+app.use(express.json());
+
 app.post("/create-checkout-session", async (req, res) => {
-  const session = await stripe.checkout.sessions.create({
-    line_items: [
-      {
-        price: "10",
-        quantity: 1,
-      },
-      {
-        price: "25",
-        quantity: 1,
-      },
-      {
-        price: "50",
-        quantity: 1,
-      },
-      {
-        price: "100",
-        quantity: 1,
-      },
-    ],
-    mode: "payment",
-    success_url: `${server}?success=true`,
-    cancel_url: `${server}?canceled=true`,
-  });
-  res.redirect(303, session.url);
+  try {
+    console.log('Request body:', req.body);  // Log the request body
+    const session = await stripe.checkout.sessions.create({
+      payment_method_types: ['card'],
+      line_items: [
+        {
+          price_data: {
+            currency: 'usd',
+            product_data: { name: 'Fitness Fusion Membership' },
+            unit_amount: 2000, // amount in cents (20.00 USD)
+          },
+          quantity: 1,
+        },
+      ],
+      mode: 'payment',
+      success_url: `${process.env.CLIENT_URL}/success`,
+      cancel_url: `${process.env.CLIENT_URL}/cancel`,
+    });
+
+    console.log('Checkout session created:', session);  // Log the session
+    res.json({ id: session.id });
+  } catch (error) {
+    console.error('Error creating checkout session:', error);
+    res.status(500).json({ error: error.message });
+  }
 });
 
 const startApolloServer = async () => {
   await server.start();
-
-  app.use(express.urlencoded({ extended: false }));
-  app.use(express.json());
-
-  // Serve up static assets
-  app.use("/images", express.static(path.join(__dirname, "../client/images")));
 
   app.use(
     "/graphql",
@@ -76,8 +74,4 @@ const startApolloServer = async () => {
   });
 };
 
-// Call the async function to start the server
 startApolloServer();
-
-// Publishable key = pk_test_51PgZdVElAhzy4uGesMESjpkxKEKaw5eGllQtvQupIqKRqSEyhMVD6YMozJUx0OpIOOHwZNRswZs9Z238vXJUaJtk000YQFx7LB
-// Secret Key = sk_test_51PgZdVElAhzy4uGeVPTVIizjXMqKEKPhyjdK7tC3fo6LuZmEKU9fkkEVZ2ldwegaDbgpYyBjHyqGsr8m9i7qP3T500o17GY0Zk

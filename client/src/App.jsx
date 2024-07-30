@@ -6,9 +6,11 @@ import "./App.css";
 import Login from "./components/Auth/Login";
 import Signup from "./components/Auth/Signup";
 import Layout from "./components/Layout/Layout";
-import Home from "./pages/Home"
-import Workout from './pages/Workout'
-
+import Home from "./pages/Home";
+import Workout from './pages/Workout';
+import StripeContainer from './components/StripeContainer';
+import SuccessPage from './components/SuccessPage';
+import CancelPage from './components/CancelPage';
 
 // Construct our main GraphQL API endpoint
 const httpLink = createHttpLink({
@@ -17,9 +19,7 @@ const httpLink = createHttpLink({
 
 // Construct request middleware that will attach the JWT token to every request as an `authorization` header
 const authLink = setContext((_, { headers }) => {
-  // get the authentication token from local storage if it exists
   const token = localStorage.getItem('id_token');
-  // return the headers to the context so httpLink can read them
   return {
     headers: {
       ...headers,
@@ -29,11 +29,9 @@ const authLink = setContext((_, { headers }) => {
 });
 
 const client = new ApolloClient({
-  // Set up our client to execute the `authLink` middleware prior to making the request to our GraphQL API
   link: authLink.concat(httpLink),
   cache: new InMemoryCache(),
 });
-
 
 function App() {
   return (
@@ -41,17 +39,17 @@ function App() {
       <Router>
         <Layout>
           <Routes>
-
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/" element={<Home />} />
-            <Route path='/workout' element={<Workout />}/>
-
+            <Route path='/workout' element={<Workout />} />
+            <Route path='/checkout' element={<StripeContainer />} />
+            <Route path='/success' element={<SuccessPage />} />
+            <Route path='/cancel' element={<CancelPage />} />
           </Routes>
         </Layout>
       </Router>
     </ApolloProvider> 
-
   );
 }
 
