@@ -17,26 +17,41 @@ const Home = () => {
     return <Text>Loading....</Text>;
   }
 
-  if (classError) {
-    return <Text>Error loading classes: {classError.message}</Text>;
-  }
+  const [addClassToUser, { error, data2 }] = useMutation(ADDCLASSTOUSER)
 
+  
   const classes = classData?.class || [];
-
+  const user = userData?.user || [];
+  
+  let userClass = [];
+  const  timeout = async function(delay) {
+    return new Promise(res => setTimeout(res, delay * 1000));
+  }
+  if (user.classes) {
+    for (let i = 0; i < user.classes.length; i++) {
+      userClass.push(user.classes[i]._id)
+    }
+  }
+ 
   const handleClick = async (event, _id) => {
     event.preventDefault();
-
+    await timeout(5)
     try {
       await addClassToUser({ variables: { id: _id } });
 
       if (mutationError) {
         throw new Error('Something went wrong!');
       }
+      
     } catch (e) {
       console.error(e);
     }
-  };
+  }
 
+
+  if (classLoading) {
+    return "Loading...."
+  }
   return (
     <>
       <VStack spacing={4} align="center">
