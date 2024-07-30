@@ -13,12 +13,16 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import { searchMucleGroup } from "../utils/api";
+import Auth from "../utils/auth";
 import { useState } from "react";
 import { useQuery } from "@apollo/client";
 import { QUERY_USER } from "../utils/queries";
+import { Link } from "react-router-dom";
 
+const loggedIn = Auth.loggedIn();
 const beginnerSetsKey = "Beginner Sets".replace(/\s/g, "");
 const IntermediateSetsKey = "Intermediate Sets".replace(/\s/g, "");
+
 const Workout = () => {
   const [muscleGroup, setMuscleGroup] = useState([]);
   const { loading, data } = useQuery(QUERY_USER);
@@ -40,7 +44,21 @@ const Workout = () => {
       console.error(err);
     }
   };
-
+  if (!loggedIn) {
+    return (
+      <Stack spacing={4} mt={24}>
+        <Text fontSize="xl" color="red.500">
+          You are not authorized to view this page. Please click below to log
+          in.
+          <br></br>
+          <br></br>
+          <Link to={"/login"}>
+            <button>Login</button>
+          </Link>
+        </Text>
+      </Stack>
+    );
+  }
   return (
     <Stack spacing={4} mt={24}>
       <Menu mt={30}>
