@@ -45,8 +45,8 @@ const Workout = () => {
         return (
             <Stack spacing={4} mt={24} align="center">
                 <Menu mt={30}>
-                    <MenuButton as={Button} rightIcon="↓">
-                        Muscle Group
+                    <MenuButton as={Button} >
+                        Muscle Group ↓
                     </MenuButton>
                     <MenuList>
                         <MenuItem onClick={() => handleInput('biceps')} >Biceps</MenuItem>
