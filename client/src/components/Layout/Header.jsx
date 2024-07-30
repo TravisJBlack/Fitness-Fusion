@@ -66,7 +66,8 @@ const Header = () => {
                   px={2}
                   py={1}
                   rounded="md"
-                  _hover={{ bg: "teal.700" }}
+                  _hover={{ bg: "pink.700", textColor: "white", fontWeight: "bold" }}
+
                 >
                   Profile
                 </ChakraLink>
@@ -78,7 +79,8 @@ const Header = () => {
                   px={2}
                   py={1}
                   rounded="md"
-                  _hover={{ bg: "teal.700" }}
+                  _hover={{ bg: "pink.700", textColor: "white", fontWeight: "bold" }}
+
                 >
                   Workout
                 </ChakraLink>
@@ -90,7 +92,8 @@ const Header = () => {
                   px={2}
                   py={1}
                   rounded="md"
-                  _hover={{ bg: "teal.700" }}
+                  _hover={{ bg: "pink.700", textColor: "white", fontWeight: "bold" }}
+
                   onClick={Auth.logout}
                 >
                   Logout
@@ -104,7 +107,8 @@ const Header = () => {
                   px={2}
                   py={1}
                   rounded="md"
-                  _hover={{ bg: "teal.700" }}
+                  _hover={{ bg: "pink.700", textColor: "white", fontWeight: "bold" }}
+
                 >
                   Login
                 </ChakraLink>
@@ -115,7 +119,8 @@ const Header = () => {
                   px={2}
                   py={1}
                   rounded="md"
-                  _hover={{ bg: "teal.700" }}
+                  _hover={{ bg: "pink.700", textColor: "white", fontWeight: "bold" }}
+
                 >
                   Signup
                 </ChakraLink>
