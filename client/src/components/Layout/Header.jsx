@@ -42,13 +42,14 @@ const Header = () => {
         />
         <HStack spacing={8} alignItems="center">
           <Box color="white" margin="10" fontWeight="extrabold">
-
+ 
           <Image
+          marginTop="10"
     boxSize='50px'
     objectFit='cover'
     src={source}
   />
-            FitnessFusion
+           FitnessFusion
             
 
           </Box>
@@ -59,7 +60,7 @@ const Header = () => {
               px={2}
               py={1}
               rounded="md"
-              _hover={{ bg: "teal.700" }}
+              _hover={{ bg: "pink.700", textColor: "white", fontWeight: "bold" }}
             >
               Home
             </ChakraLink>
@@ -75,7 +76,7 @@ const Header = () => {
               px={2}
               py={1}
               rounded="md"
-              _hover={{ bg: "teal.700" }}
+              _hover={{ bg: "pink.700", textColor: "white", fontWeight: "bold" }}
             >
               Profile
             </ChakraLink>
@@ -87,7 +88,7 @@ const Header = () => {
                 px={2}
                 py={1}
                 rounded="md"
-                _hover={{ bg: "teal.700" }}
+                _hover={{ bg: "pink.700", textColor: "white", fontWeight: "bold" }}
                 onClick={Auth.logout}
               >
                 Logout
@@ -100,7 +101,7 @@ const Header = () => {
               px={2}
               py={1}
               rounded="md"
-              _hover={{ bg: "teal.700" }}
+              _hover={{ bg: "pink.700", textColor: "white", fontWeight: "bold" }}
             >
               Login
             </ChakraLink>
@@ -111,7 +112,7 @@ const Header = () => {
                 px={2}
                 py={1}
                 rounded="md"
-                _hover={{ bg: "teal.700" }}
+                _hover={{ bg: "pink.700", textColor: "white", fontWeight: "bold" }}
               >
                 Signup
               </ChakraLink>
