@@ -7,7 +7,7 @@ const resolvers = {
       if (context.user) {
         return User.findOne({ _id: context.user._id }).populate("classes");
       }
-      throw AuthenticationError;
+      throw new AuthenticationError("You must be logged in!");
     },
 
     class: async (parent, args) => {
@@ -21,19 +21,18 @@ const resolvers = {
     getSingleClass: async (parent, { name }) => {
       return Class.findOne({ name });
     },
+
     getClassesByName: async (parent, { name }) => {
-      console.log("Ramen");
       const classes = await Class.find({
         name: { $regex: name, $options: "i" },
       });
-      console.log(classes);
       return classes;
     },
   },
 
   Mutation: {
     addUser: async (parent, { username, email, password, age }) => {
-      const user = User.create({ username, email, password, age });
+      const user = await User.create({ username, email, password, age });
       const token = signToken(user);
       return { token, user };
     },
@@ -42,81 +41,76 @@ const resolvers = {
       const user = await User.findOne({ email });
 
       if (!user) {
-        throw AuthenticationError;
+        throw new AuthenticationError("Incorrect credentials");
       }
 
       const correctPw = await user.isCorrectPassword(password);
 
       if (!correctPw) {
-        throw AuthenticationError;
+        throw new AuthenticationError("Incorrect credentials");
       }
+
       const token = signToken(user);
 
       return { token, user };
     },
 
-    addClassToUser: async (parent, { _id }, context) => {
+    addClassToUser: async (parent, { name }, context) => {
       if (context.user) {
-        const register = await Class.findOne({ _id });
+        const register = await Class.findOne({ name });
 
-        return User.findOneAndUpdate(
-          { _id: context.user._id },
+        if (!register) {
+          throw new Error("Class not found");
+        }
+
+        return User.findByIdAndUpdate(
+          context.user._id,
           {
-            $addToSet: {
-              classes: {
-                _id: register._id,
-                name: register.name,
-                description: register.description,
-                price: register.price,
-                schedule: register.schedule,
-                image: register.image,
-              },
-            },
+            $addToSet: { classes: register._id },
           },
           { new: true, runValidators: true }
         ).populate("classes");
       }
-      throw AuthenticationError;
+      throw new AuthenticationError("You must be logged in!");
     },
 
     removeClassFromUser: async (parent, { _id }, context) => {
       if (context.user) {
-        return User.findOneAndUpdate(
-          { _id: context.user._id },
-          { $pull: { classes: { _id: _id } } },
+        return User.findByIdAndUpdate(
+          context.user._id,
+          { $pull: { classes: _id } },
           { new: true, runValidators: true }
         ).populate("classes");
       }
-      throw AuthenticationError;
+      throw new AuthenticationError("You must be logged in!");
     },
 
     removeUser: async (parent, args, context) => {
       if (context.user) {
-        return User.findOneAndDelete({ _id: context.user._id });
+        return User.findByIdAndDelete(context.user._id);
       }
+      throw new AuthenticationError("You must be logged in!");
     },
 
     addMembershipToUser: async (parent, { _id }, context) => {
       if (context.user) {
-        const membership = await Membership.findOne({ _id });
+        const membership = await Membership.findById(_id);
 
-        return User.findOneAndUpdate(
-          { _id: context.user._id },
+        if (!membership) {
+          throw new Error("Membership not found");
+        }
+
+        return User.findByIdAndUpdate(
+          context.user._id,
           {
-            $addToSet: {
-              membership: {
-                _id: membership._id,
-                name: membership.name,
-                description: membership.description,
-                price: membership.price,
-              },
-            },
+            $addToSet: { membership: membership._id },
           },
           { new: true, runValidators: true }
-        ).populate("classes");
+        ).populate("membership");
       }
-      throw AuthenticationError;
+      throw new AuthenticationError("You must be logged in!");
     },
   },
 };
+
 module.exports = resolvers;

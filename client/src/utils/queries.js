@@ -65,10 +65,11 @@ export const QUERY_CLASSES_BY_NAME = gql`
   query getClassesByName($name: String!) {
     getClassesByName(name: $name) {
       _id
-      name
       description
-      schedule
+      image
+      name
       price
+      schedule
     }
   }
 `;
