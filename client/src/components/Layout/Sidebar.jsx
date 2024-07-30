@@ -5,11 +5,9 @@ import { Link as RouterLink } from "react-router-dom";
 const Sidebar = () => {
   return (
     <Box
-
       bgGradient="linear(to-t, purple.200, purple.500)"
       // bg="purple.400"
       color="white"
-      
       //pos="fixed"
       h="full"
       p={4}
@@ -28,9 +26,9 @@ const Sidebar = () => {
         >
           Home
         </ChakraLink>
-        <hr color='#cccccc' width="100%"/> 
+        <hr color="#cccccc" width="100%" />
         <ChakraLink
-        className="background-red-500"
+          className="background-red-500"
           as={RouterLink}
           to="/profile"
           px={2}
@@ -40,7 +38,7 @@ const Sidebar = () => {
         >
           Profile
         </ChakraLink>
-        <hr color='#cccccc' width="100%"/> 
+        <hr color="#cccccc" width="100%" />
         <ChakraLink
           as={RouterLink}
           to="/settings"
@@ -51,7 +49,18 @@ const Sidebar = () => {
         >
           Settings
         </ChakraLink>
-        <hr color='#cccccc' width="100%"/> 
+        <hr color="#cccccc" width="100%" />
+        <ChakraLink
+          as={RouterLink}
+          to="/workout"
+          px={2}
+          py={1}
+          rounded="md"
+          _hover={{ bg: "teal.700" }}
+        >
+          Workout
+        </ChakraLink>
+        <hr color="#cccccc" width="100%" />
         <ChakraLink
           as={RouterLink}
           to="/logout"
@@ -65,7 +74,6 @@ const Sidebar = () => {
       </VStack>
     </Box>
   );
-
 };
 
 export default Sidebar;
