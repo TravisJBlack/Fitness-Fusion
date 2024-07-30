@@ -36,20 +36,28 @@ const Home = () => {
 
   const classes = classData?.class || [];
   const user = userData?.user || [];
-  console.log(user);
+
+  let userClass = [];
+  const timeout = async function (delay) {
+    return new Promise((res) => setTimeout(res, delay * 1000));
+  };
+  if (user.classes) {
+    for (let i = 0; i < user.classes.length; i++) {
+      userClass.push(user.classes[i]._id);
+    }
+  }
 
   const handleClick = async (event, _id) => {
     event.preventDefault();
-
+    await timeout(5);
     try {
-      const { data2 } = await addClassToUser({
+      await addClassToUser({
         variables: { id: _id },
       });
 
       if (error) {
         throw new Error("something went wrong!");
       }
-      return;
     } catch (e) {
       console.error(e);
     }
@@ -129,15 +137,25 @@ const Home = () => {
                             Add class to membership
                           </Button>
                         </PopoverTrigger>
-
-                        <PopoverContent>
-                          <PopoverArrow />
-                          <PopoverCloseButton />
-                          <PopoverHeader>Confirmation!</PopoverHeader>
-                          <PopoverBody>
-                            Class has been added to your account!
-                          </PopoverBody>
-                        </PopoverContent>
+                        {userClass.includes(course._id) ? (
+                          <PopoverContent>
+                            <PopoverArrow />
+                            <PopoverCloseButton />
+                            <PopoverHeader>Already Enrolled!!</PopoverHeader>
+                            <PopoverBody>
+                              Look forward to seeing you in class!!!
+                            </PopoverBody>
+                          </PopoverContent>
+                        ) : (
+                          <PopoverContent>
+                            <PopoverArrow />
+                            <PopoverCloseButton />
+                            <PopoverHeader>Confirmation!</PopoverHeader>
+                            <PopoverBody>
+                              Class has been added to your account!
+                            </PopoverBody>
+                          </PopoverContent>
+                        )}
                       </Popover>
                     ) : (
                       <Link to="/login">

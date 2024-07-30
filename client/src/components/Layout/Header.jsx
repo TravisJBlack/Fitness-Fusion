@@ -32,7 +32,12 @@ const Header = () => {
         />
         <HStack spacing={8} alignItems="center">
           <Box color="white" margin="10" fontWeight="extrabold">
-            <Image boxSize="50px" objectFit="cover" src={source} />
+            <Image
+              marginTop="10"
+              boxSize="50px"
+              objectFit="cover"
+              src={source}
+            />
             FitnessFusion
           </Box>
           <HStack as="nav" spacing={4} display={{ base: "none", md: "flex" }}>
@@ -42,12 +47,15 @@ const Header = () => {
               px={2}
               py={1}
               rounded="md"
-              _hover={{ bg: "teal.700" }}
+              _hover={{
+                bg: "pink.700",
+                textColor: "white",
+                fontWeight: "bold",
+              }}
             >
               Home
             </ChakraLink>
             <span>|</span>
-
             {Auth.loggedIn() ? (
               <>
                 <ChakraLink
@@ -59,6 +67,18 @@ const Header = () => {
                   _hover={{ bg: "teal.700" }}
                 >
                   Profile
+                </ChakraLink>
+                <span>|</span>
+
+                <ChakraLink
+                  as={RouterLink}
+                  to="/workout"
+                  px={2}
+                  py={1}
+                  rounded="md"
+                  _hover={{ bg: "teal.700" }}
+                >
+                  Workout
                 </ChakraLink>
                 <span>|</span>
 
@@ -98,6 +118,31 @@ const Header = () => {
                   Signup
                 </ChakraLink>
               </>
+            )}
+            ) : (
+            <>
+              <ChakraLink
+                as={RouterLink}
+                to="/login"
+                px={2}
+                py={1}
+                rounded="md"
+                _hover={{ bg: "teal.700" }}
+              >
+                Login
+              </ChakraLink>
+              <span>|</span>
+              <ChakraLink
+                as={RouterLink}
+                to="/signup"
+                px={2}
+                py={1}
+                rounded="md"
+                _hover={{ bg: "teal.700" }}
+              >
+                Signup
+              </ChakraLink>
+            </>
             )}
           </HStack>
         </HStack>
