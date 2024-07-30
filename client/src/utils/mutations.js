@@ -1,8 +1,18 @@
-import { gql } from '@apollo/client';
+import { gql } from "@apollo/client";
 
 export const ADD_USER = gql`
-mutation addUser($username: String!, $email: String!, $password: String!, $age: Int!) {
-    addUser(username: $username, email: $email, password: $password, age: $age) {
+  mutation addUser(
+    $username: String!
+    $email: String!
+    $password: String!
+    $age: Int!
+  ) {
+    addUser(
+      username: $username
+      email: $email
+      password: $password
+      age: $age
+    ) {
       token
       user {
         _id
@@ -29,7 +39,7 @@ mutation addUser($username: String!, $email: String!, $password: String!, $age: 
 `;
 
 export const LOGIN_USER = gql`
-mutation login($email: String!, $password: String!) {
+  mutation login($email: String!, $password: String!) {
     login(email: $email, password: $password) {
       token
       user {
@@ -57,7 +67,7 @@ mutation login($email: String!, $password: String!) {
 `;
 
 export const ADDCLASSTOUSER = gql`
-mutation addClassToUser($id: ID!) {
+  mutation addClassToUser($id: ID!) {
     addClassToUser(_id: $id) {
       _id
       username
@@ -79,10 +89,10 @@ mutation addClassToUser($id: ID!) {
       }
     }
   }
-`;  
+`;
 
 export const REMOVECLASSFROMUSER = gql`
-mutation removeClassFromUser($id: ID!) {
+  mutation removeClassFromUser($id: ID!) {
     removeClassFromUser(_id: $id) {
       _id
       username
@@ -107,7 +117,7 @@ mutation removeClassFromUser($id: ID!) {
 `;
 
 export const REMOVEUSER = gql`
-mutation removeUser($id: ID!) {
+  mutation removeUser($id: ID!) {
     removeUser(_id: $id) {
       _id
       username
@@ -132,7 +142,7 @@ mutation removeUser($id: ID!) {
 `;
 
 export const ADDMEMBERSHIPTOUSER = gql`
-mutation addMembershipToUser($id: ID!) {
+  mutation addMembershipToUser($id: ID!) {
     addMembershipToUser(_id: $id) {
       _id
       username
