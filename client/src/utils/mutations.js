@@ -67,8 +67,8 @@ export const LOGIN_USER = gql`
 `;
 
 export const ADDCLASSTOUSER = gql`
-  mutation addClassToUser($name: String!, $isID: Boolean!) {
-    addClassToUser(name: $name, isID: $isID) {
+  mutation addClassToUser($name: String, $id: ID) {
+    addClassToUser(name: $name, id: $id) {
       _id
       username
       email

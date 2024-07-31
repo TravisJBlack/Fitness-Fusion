@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 import {
   Stack,
@@ -35,29 +35,41 @@ const Home = () => {
   const [addClassToUser, { error, data: data2 }] = useMutation(ADDCLASSTOUSER);
 
   const classes = classData?.class || [];
-  const user = userData?.user || [];
+  let user = userData?.user || [];
 
   if (error) console.log(JSON.stringify(error));
 
-  let userClass = [];
+  const [userClass, setUserClass] = useState([]);
   const timeout = async function (delay) {
     return new Promise((res) => setTimeout(res, delay * 1000));
   };
-  if (user.classes) {
-    for (let i = 0; i < user.classes.length; i++) {
-      userClass.push(user.classes[i]._id);
+
+  useEffect(() => {
+    // setUserClass([...userClass, "peanuts"]);
+    if (user.classes) {
+      let userArray = [];
+      for (let i = 0; i < user.classes.length; i++) {
+        console.log(user.classes);
+        // return setUserClass([...userClass, user.classes[i]._id]);
+        // console.log(user.classes[i]._id);
+        // console.log(...userClass);
+        userArray.push(user.classes[i]._id);
+      }
+      setUserClass(userArray);
     }
-  }
+  }, [user]);
 
   const handleClick = async (event, _id) => {
     event.preventDefault();
     console.log(_id);
+    console.log("USERCLASS: ", userClass);
     await timeout(5);
     try {
-      await addClassToUser({
-        variables: { name: _id, isID: true },
+      const { data } = await addClassToUser({
+        variables: { id: _id },
       });
-
+      console.log(data.addClassToUser);
+      user = data.addClassToUser;
       if (error) {
         throw new Error("something went wrong!");
       }
