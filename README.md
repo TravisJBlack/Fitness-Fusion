@@ -47,19 +47,19 @@ cd fitnessfusion
 
 3. Install the dependencies:
 
+```bash
 npm install
-
-````
+```
 
 4. Start the development server:
 
 ```bash
 npm run develop
-````
+```
 
 ## Usage
 
-1. Open your browser and navigate to
+1. Open your browser and navigate to `https://fitness-fusion-kzry.onrender.com/`
 2. Sign up for a new account or log in with an existing account.
 3. Browse available fitness classes and enroll in the ones you like.
 4. Manage your profile and view your enrolled classes.

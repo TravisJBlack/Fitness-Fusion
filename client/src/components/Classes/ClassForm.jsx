@@ -22,9 +22,18 @@ const ClassForm = () => {
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
+    const firstLetter = classId.trim()[0].toUpperCase();
+    const otherLetters = classId
+      .trim()
+      .split("")
+      .slice(1)
+      .join("")
+      .toLowerCase();
+    const name = firstLetter + otherLetters;
+
     try {
       await addClassToUser({
-        variables: { name: classId },
+        variables: { name, isID: false },
       });
       alert("Enrolled successfully!");
       setClassId("");

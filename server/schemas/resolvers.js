@@ -55,10 +55,12 @@ const resolvers = {
       return { token, user };
     },
 
-    addClassToUser: async (parent, { name }, context) => {
+    addClassToUser: async (parent, { name, isID }, context) => {
       if (context.user) {
         console.log(context.user);
-        const register = await Class.findOne({ name });
+        const register = isID
+          ? await Class.findOne({ _id: name })
+          : await Class.findOne({ name });
         console.log(register);
         if (!register) {
           throw new Error("Class not found");
