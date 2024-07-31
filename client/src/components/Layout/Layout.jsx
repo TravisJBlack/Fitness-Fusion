@@ -9,7 +9,6 @@ const Layout = ({ children }) => {
       <Flex direction="column" minH="100vh" width="100%">
         <Header />
         <Flex flex={1} width="100%">
-          {/* <Sidebar /> */}
           <Box flex={1} ml={{ base: 0, md: 0 }} p={4}>
             {children}
           </Box>
