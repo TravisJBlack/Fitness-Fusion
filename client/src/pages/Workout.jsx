@@ -28,7 +28,7 @@ const Workout = () => {
   const { loading, data } = useQuery(QUERY_USER);
 
   const user = data?.user || [];
-  console.log(user);
+
   const handleInput = async (searchInput) => {
     try {
       const response = await searchMucleGroup(searchInput);
@@ -38,7 +38,7 @@ const Workout = () => {
       }
 
       const muscle = await response.json();
-      console.log(muscle);
+  
       setMuscleGroup(muscle);
     } catch (err) {
       console.error(err);
