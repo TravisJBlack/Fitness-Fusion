@@ -30,7 +30,7 @@ app.post("/create-checkout-session", async (req, res) => {
           price_data: {
             currency: 'usd',
             product_data: { name: 'Fitness Fusion Membership' },
-            unit_amount: 2000, // amount in cents (20.00 USD)
+            unit_amount: 15000, // amount in cents (150.00 USD)
           },
           quantity: 1,
         },
