@@ -79,7 +79,10 @@ const Home = () => {
           FitnessFusion
         </Heading>
         <Text>
-          Welcome to FitnessFusion were your fitness dreams become reality!!!
+
+          Welcome to FitnessFusion where your fitness dreams become reality!!!
+
+
         </Text>
 
         {classes.map((course, index) => {
