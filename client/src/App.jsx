@@ -1,39 +1,39 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { ApolloClient, ApolloProvider, InMemoryCache, createHttpLink } from '@apollo/client';
-import { setContext } from '@apollo/client/link/context';
+import {
+  ApolloClient,
+  ApolloProvider,
+  InMemoryCache,
+  createHttpLink,
+} from "@apollo/client";
+import { setContext } from "@apollo/client/link/context";
 import "./App.css";
 import Login from "./components/Auth/Login";
 import Signup from "./components/Auth/Signup";
 import Layout from "./components/Layout/Layout";
-import Home from "./pages/Home"
-import Workout from './pages/Workout'
+import Home from "./pages/Home";
+import Workout from "./pages/Workout";
+import Profile from "./components/profile/profile";
+import ClassesPage from "./pages/ClassesPage";
 
-
-// Construct our main GraphQL API endpoint
 const httpLink = createHttpLink({
-  uri: '/graphql',
+  uri: "/graphql",
 });
 
-// Construct request middleware that will attach the JWT token to every request as an `authorization` header
 const authLink = setContext((_, { headers }) => {
-  // get the authentication token from local storage if it exists
-  const token = localStorage.getItem('id_token');
-  // return the headers to the context so httpLink can read them
+  const token = localStorage.getItem("id_token");
   return {
     headers: {
       ...headers,
-      authorization: token ? `Bearer ${token}` : '',
+      authorization: token ? `Bearer ${token}` : "",
     },
   };
 });
 
 const client = new ApolloClient({
-  // Set up our client to execute the `authLink` middleware prior to making the request to our GraphQL API
   link: authLink.concat(httpLink),
   cache: new InMemoryCache(),
 });
-
 
 function App() {
   return (
@@ -41,17 +41,16 @@ function App() {
       <Router>
         <Layout>
           <Routes>
-
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/" element={<Home />} />
-            <Route path='/workout' element={<Workout />}/>
-
+            <Route path="/workout" element={<Workout />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/classes" element={<ClassesPage />} />
           </Routes>
         </Layout>
       </Router>
-    </ApolloProvider> 
-
+    </ApolloProvider>
   );
 }
 

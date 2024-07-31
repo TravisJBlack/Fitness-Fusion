@@ -33,6 +33,7 @@ const typeDefs = `
     type Query {
         user: User
         getSingleClass(name: String!): Class
+        getClassesByName(name: String!): [Class]
         class: [Class]
         membership: [Membership]
     }
@@ -40,11 +41,11 @@ const typeDefs = `
     type Mutation {
         addUser(username: String!, email: String!, password: String!, age: Int!): Auth
         login(email: String!, password: String!): Auth
-        addClassToUser(_id: ID!): User
-        removeClassFromUser(_id: ID!): User      
+        addClassToUser(name: String!): User
+        removeClassFromUser(name: String!): User      
         removeUser(_id: ID!): User
         addMembershipToUser(_id: ID!): User
     }
-`
+`;
 
 module.exports = typeDefs;

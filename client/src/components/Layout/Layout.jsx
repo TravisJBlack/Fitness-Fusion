@@ -3,9 +3,7 @@ import { Box, Flex, Grid, GridItem } from "@chakra-ui/react";
 import Header from "./Header";
 import Footer from "./Footer";
 
-
 const Layout = ({ children }) => {
-
   return (
     <>
       <Flex direction="column" minH="100vh" width="100%">
@@ -18,9 +16,8 @@ const Layout = ({ children }) => {
         </Flex>
         <Footer />
       </Flex>
-      </>
-      )
+    </>
+  );
+};
 
-  }
-
-      export default Layout;
+export default Layout;

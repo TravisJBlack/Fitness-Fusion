@@ -28,17 +28,13 @@ const Header = () => {
         />
         <HStack spacing={8} alignItems="center">
           <Box color="white" margin="10" fontWeight="extrabold">
-
- 
-          <Image
-          marginTop="10"
-    boxSize='50px'
-    objectFit='cover'
-    src={source}
-  />
-           FitnessFusion
-            
-
+            <Image
+              marginTop="10"
+              boxSize="50px"
+              objectFit="cover"
+              src={source}
+            />
+            FitnessFusion
           </Box>
           <HStack as="nav" spacing={4} display={{ base: "none", md: "flex" }}>
             <ChakraLink
@@ -47,15 +43,17 @@ const Header = () => {
               px={2}
               py={1}
               rounded="md"
-              _hover={{ bg: "pink.700", textColor: "white", fontWeight: "bold" }}
+              _hover={{
+                bg: "pink.700",
+                textColor: "white",
+                fontWeight: "bold",
+              }}
             >
               Home
             </ChakraLink>
             <span>|</span>
-
             {Auth.loggedIn() ? (
               <>
-
                 <ChakraLink
                   as={RouterLink}
                   to="/profile"
@@ -122,7 +120,6 @@ const Header = () => {
                 </ChakraLink>
               </>
             )}
-
           </HStack>
         </HStack>
       </Flex>
