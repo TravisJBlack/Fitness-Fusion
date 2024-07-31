@@ -49,6 +49,7 @@ const Home = () => {
 
   const handleClick = async (event, _id) => {
     event.preventDefault();
+    console.log(_id);
     await timeout(5);
     try {
       await addClassToUser({
@@ -132,7 +133,7 @@ const Home = () => {
                                 ? "linear(to-t, purple.100, purple.500)"
                                 : "linear(to-t, purple.500, purple.100)"
                             }
-                            onClick={() => handleClick(event, course._id)}
+                            onClick={(event) => handleClick(event, course._id)}
                           >
                             Add class to membership
                           </Button>

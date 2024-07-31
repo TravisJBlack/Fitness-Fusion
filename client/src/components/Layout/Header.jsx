@@ -119,31 +119,6 @@ const Header = () => {
                 </ChakraLink>
               </>
             )}
-            ) : (
-            <>
-              <ChakraLink
-                as={RouterLink}
-                to="/login"
-                px={2}
-                py={1}
-                rounded="md"
-                _hover={{ bg: "teal.700" }}
-              >
-                Login
-              </ChakraLink>
-              <span>|</span>
-              <ChakraLink
-                as={RouterLink}
-                to="/signup"
-                px={2}
-                py={1}
-                rounded="md"
-                _hover={{ bg: "teal.700" }}
-              >
-                Signup
-              </ChakraLink>
-            </>
-            )}
           </HStack>
         </HStack>
       </Flex>

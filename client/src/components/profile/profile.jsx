@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { useQuery } from "@apollo/client";
+import { useQuery, useMutation } from "@apollo/client";
 import { Box, Text, Heading, VStack, Button } from "@chakra-ui/react";
 import { QUERY_USER, QUERY_SINGLECLASS } from "../../utils/queries";
+import { REMOVECLASSFROMUSER } from "../../utils/mutations";
 import { useParams } from "react-router-dom";
 import ClassForm from "../Classes/ClassForm";
 
@@ -22,6 +23,18 @@ const Profile = () => {
     variables: { name: selectedClass },
     skip: !selectedClass, // Skip query if no class is selected
   });
+
+  const [removeClassFromUser] = useMutation(REMOVECLASSFROMUSER, {
+    refetchQueries: [{ query: QUERY_USER, variables: { username } }],
+  });
+
+  const handleRemoveClass = async (className) => {
+    try {
+      await removeClassFromUser({ variables: { name: className } });
+    } catch (e) {
+      console.error(e);
+    }
+  };
 
   if (loading) return <Text>Loading...</Text>;
   if (error) return <Text>Error: {error.message}</Text>;
@@ -51,6 +64,13 @@ const Profile = () => {
             <Text mt={4}>{classItem.description}</Text>
             <Text mt={4}>Schedule: {classItem.schedule}</Text>
             <Text mt={4}>Price: ${classItem.price}</Text>
+            <Button
+              mt={2}
+              colorScheme="red"
+              onClick={() => handleRemoveClass(classItem.name)}
+            >
+              Remove Class
+            </Button>
           </Box>
         ))}
       </VStack>

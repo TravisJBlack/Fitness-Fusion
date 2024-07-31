@@ -24,7 +24,7 @@ const ClassForm = () => {
     event.preventDefault();
     try {
       await addClassToUser({
-        variables: { id: classId },
+        variables: { name: classId },
       });
       alert("Enrolled successfully!");
       setClassId("");

@@ -57,28 +57,34 @@ const resolvers = {
 
     addClassToUser: async (parent, { name }, context) => {
       if (context.user) {
+        console.log(context.user);
         const register = await Class.findOne({ name });
-
+        console.log(register);
         if (!register) {
           throw new Error("Class not found");
         }
-
-        return User.findByIdAndUpdate(
+        const user = await User.findByIdAndUpdate(
           context.user._id,
           {
             $addToSet: { classes: register._id },
           },
           { new: true, runValidators: true }
         ).populate("classes");
+        console.log(user);
+        return user;
       }
       throw new AuthenticationError("You must be logged in!");
     },
 
-    removeClassFromUser: async (parent, { _id }, context) => {
+    removeClassFromUser: async (parent, { name }, context) => {
       if (context.user) {
+        const register = await Class.findOne({ name });
+        if (!register) {
+          throw new Error("Class not found");
+        }
         return User.findByIdAndUpdate(
           context.user._id,
-          { $pull: { classes: _id } },
+          { $pull: { classes: register._id } },
           { new: true, runValidators: true }
         ).populate("classes");
       }

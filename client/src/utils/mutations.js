@@ -67,8 +67,8 @@ export const LOGIN_USER = gql`
 `;
 
 export const ADDCLASSTOUSER = gql`
-  mutation addClassToUser($id: ID!) {
-    addClassToUser(_id: $id) {
+  mutation addClassToUser($name: String!) {
+    addClassToUser(name: $name) {
       _id
       username
       email
@@ -92,8 +92,8 @@ export const ADDCLASSTOUSER = gql`
 `;
 
 export const REMOVECLASSFROMUSER = gql`
-  mutation removeClassFromUser($id: ID!) {
-    removeClassFromUser(_id: $id) {
+  mutation removeClassFromUser($name: String!) {
+    removeClassFromUser(name: $name) {
       _id
       username
       email
