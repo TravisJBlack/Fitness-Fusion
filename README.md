@@ -38,3 +38,40 @@ FitnessFusion is a web application designed to help users enroll in fitness clas
 ```bash
 https://github.com/TravisJBlack/Fitness-Fusion.git
 ```
+
+2. Navigate to the project directory:
+
+```bash
+cd fitnessfusion
+```
+
+3. Install the dependencies:
+
+npm install
+
+````
+
+4. Start the development server:
+
+```bash
+npm run develop
+````
+
+## Usage
+
+1. Open your browser and navigate to
+2. Sign up for a new account or log in with an existing account.
+3. Browse available fitness classes and enroll in the ones you like.
+4. Manage your profile and view your enrolled classes.
+
+## Screenshots
+
+_Caption for home page screenshot_
+
+_Caption for profile page screenshot_
+
+_Caption for class enrollment screenshot_
+
+## Deployment
+
+The application is deployed on Render. You can access the live app at
