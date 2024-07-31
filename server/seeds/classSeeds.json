@@ -39,7 +39,7 @@
     "description": "Strengthen your core and improve your posture with our Pilates class. Focus on controlled movements and breathing to enhance your overall fitness and well-being.",
     "price": "25",
     "schedule": "February 10th to April 20th. Mondays and Wednesdays 6:30 PM - 8:30 PM",
-    "image": "../../public/images/pilates.jpg"
+    "image": "./images/pilates.jpg"
   },
   {
     "name": "Zumba",

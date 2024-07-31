@@ -66,7 +66,7 @@ const Home = () => {
       <VStack spacing={4} align="center">
         <Heading as="h2" bgGradient="linear(to-t, purple.200, purple.500)" p={6} boxShadow='dark-lg'>FitnessFusion</Heading>
         <Text>
-          Welcome to FitnessFusion were your fitness dreams become reality!!!
+          Welcome to FitnessFusion where your fitness dreams become reality!!!
 
         </Text>
 
