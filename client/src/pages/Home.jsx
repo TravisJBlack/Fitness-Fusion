@@ -47,13 +47,13 @@ const Home = () => {
     }
   }
 
-  const handleClick = async (event, _id) => {
+  const handleClick = async (event, name) => {
     event.preventDefault();
-    console.log(_id);
+
     await timeout(5);
     try {
       await addClassToUser({
-        variables: { id: _id },
+        variables: ({ name: name }),
       });
 
       if (error) {
@@ -75,10 +75,11 @@ const Home = () => {
           bgGradient="linear(to-t, purple.200, purple.500)"
           p={6}
           boxShadow="dark-lg"
+          zIndex={-1}
         >
           FitnessFusion
         </Heading>
-        <Text>
+        <Text zIndex={-1}>
 
           Welcome to FitnessFusion where your fitness dreams become reality!!!
 
@@ -136,7 +137,7 @@ const Home = () => {
                                 ? "linear(to-t, purple.100, purple.500)"
                                 : "linear(to-t, purple.500, purple.100)"
                             }
-                            onClick={(event) => handleClick(event, course._id)}
+                            onClick={() => handleClick(event, course.name)}
                           >
                             Add class to membership
                           </Button>
