@@ -49,7 +49,7 @@ const Home = () => {
 
   const handleClick = async (event, name) => {
     event.preventDefault();
-    // console.log(_id);
+
     await timeout(5);
     try {
       await addClassToUser({
@@ -75,10 +75,11 @@ const Home = () => {
           bgGradient="linear(to-t, purple.200, purple.500)"
           p={6}
           boxShadow="dark-lg"
+          zIndex={-1}
         >
           FitnessFusion
         </Heading>
-        <Text>
+        <Text zIndex={-1}>
 
           Welcome to FitnessFusion where your fitness dreams become reality!!!
 
