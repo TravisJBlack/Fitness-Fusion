@@ -9,10 +9,7 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import { Link as RouterLink } from "react-router-dom";
-
-import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
 import Auth from "../../utils/auth";
-
 import source from "../../../public/images/unnamed.jpg";
 
 const Header = () => {
@@ -23,8 +20,7 @@ const Header = () => {
       <Flex h={16} alignItems="center" justifyContent="space-between" mx="auto">
         <IconButton
           size="md"
-          icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
-          // icon={isOpen ? <></> : <></>}
+         
 
           aria-label="Open Menu"
           display={{ md: "none" }}
