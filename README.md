@@ -65,13 +65,19 @@ npm run develop
 4. Manage your profile and view your enrolled classes.
 
 ## Screenshots
+### Home Page
+![Home Page](./images/Screenshot%202024-08-01%20at%204.25.24%20PM.png)
+Once logged in you are abble to add classes to your profile
 
-_Caption for home page screenshot_
-
-_Caption for profile page screenshot_
-
+### Sign UP
+![sign up](./images/Screenshot%202024-08-01%20at%206.00.30%20PM.png)
 _Caption for class enrollment screenshot_
+
+### Workouts
+![Workouts](./images/Screenshot%202024-08-01%20at%206.00.43%20PM.png)
+Here you are able to look up workouts depending on what muscle group you want to focus on
 
 ## Deployment
 
 The application is deployed on Render. You can access the live app at
+https://fitness-fusion-kzry.onrender.com/
